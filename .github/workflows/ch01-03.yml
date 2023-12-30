@@ -19,5 +19,5 @@ jobs:
           echo: "job: $GITHUB_JOB"
           echo: "Run Id: $GTIHUB_RUN_ID"
       - name: Step 3
-        run: "echo variable: ${{ var.PRODUCTION_SERVER }}"
+        run: "echo variable: ${{ vars.PRODUCTION_SERVER }}"
         
