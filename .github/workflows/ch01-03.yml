@@ -13,11 +13,12 @@ jobs:
         run: |
           echo "run step1 , say hello to ${{ env.GITHUB_ACTOR }}"
           echo "HELLO TO $GITHUB_ACTOR"
-          ehco "EVENT: $GITHUB_EVENT_NAME"
+          echo "EVENT: $GITHUB_EVENT_NAME"
       - name: Step 2
         run: |
           echo: "job: $GITHUB_JOB"
           echo: "Run Id: $GTIHUB_RUN_ID"
       - name: Step 3
-        run: "echo variable: ${{ vars.PRODUCTION_SERVER }}"
+        run: |
+          echo "variable: ${{ vars.PRODUCTION_SERVER }}"
         
