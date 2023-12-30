@@ -10,7 +10,7 @@ jobs:
         echo "::set-output name=uuid::$(uuidgen)"
     - name: Print UUID
       run: |
-        echo "UUID: ${{ steps.uuid.outputs.uuid }}
+        echo "UUID: ${{ steps.uuid.outputs.uuid }}"
         echo "${{ steps.uuid.outputs.uuid }}" > uuid.txt
     - name: Upload UUID
       uses: actions/upload-artifact@v3
