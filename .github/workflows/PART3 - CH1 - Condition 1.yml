@@ -3,10 +3,10 @@
   on: workflow_dispatch
   jobs:
     build:
+      if: github.repository == 'jihyungSong/github-action-course'
       runs-on: ubuntu-latest
       steps:
-      - if: github.repository == 'jihyungSong/github-action-course'
-        name: Step 1
+      - name: Step 1
         run: |
           echo "Run Step 1, Say Hello"
       - name: Step 2
