@@ -21,9 +21,7 @@
     test-job2:
       needs: test-job
       runs-on: ubuntu-latest
-      steps:
-        - name: echoSystem
-          run: echo "current : $PWD"
+      steps:        
         - id: hello
           name: generate name
           run: echo "name=$RANDOM-name" >> "$GITHUB_OUTPUT"
