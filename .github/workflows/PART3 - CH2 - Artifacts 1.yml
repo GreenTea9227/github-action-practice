@@ -26,4 +26,5 @@ jobs:
       with:
         name: uuid
     - name: Print UUID
-      run: echo "UUID: $(cat uuid.txt)"
+      run: |
+        echo "UUID: $(cat uuid.txt)"
