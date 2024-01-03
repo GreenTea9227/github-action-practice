@@ -1,14 +1,18 @@
 name: PART4 - CH1 - Contents exposed from untrusted input
 on: 
   issues:
-    types: 
+    types:
     - opened
     - edited
+    
 permissions:
   issues: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NAME: yohan
     steps:
       - uses: actions/checkout@v3
       - name: Move Sample code
@@ -19,7 +23,12 @@ jobs:
         run: |
           title="${{ github.event.issue.title }}"
           echo $title
+          echo env : $NAME
+          echo git env : ${{ env.NAME }}
       - name: Auto assign issue
         uses: pozil/auto-assign-issue@v1
         with:
           assignees: ${{ vars.BUG_HUNTERS }}
+      
+
+    
