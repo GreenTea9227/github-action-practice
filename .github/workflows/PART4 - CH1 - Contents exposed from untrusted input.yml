@@ -1,9 +1,10 @@
 name: PART4 - CH1 - Contents exposed from untrusted input
-on: 
-  issues:
-    types:
-    - opened
-    - edited
+# on: 
+#   issues:
+#     types:
+#     - opened
+#     - edited
+on: workflow_dispatch
     
 permissions:
   issues: write
