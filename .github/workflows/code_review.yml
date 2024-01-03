@@ -1,8 +1,13 @@
-name: code review test
-on: [pull_request]
+name: Codeball
+on:
+  pull_request: {}
+  pull_request_review_comment:
+    types: [created, edited]
+
 jobs:
-  code_review:
+  codeball_job:
     runs-on: ubuntu-latest
+    name: Codeball
     steps:
       - name: Codeball
         uses: sturdy-dev/codeball-action@v2
