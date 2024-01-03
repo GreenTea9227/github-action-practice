@@ -18,6 +18,8 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: '8.3'
+    - name: Grant execute permission to Gradlew
+      run: chmod +x ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
     - name: Archive build artifacts
