@@ -1,0 +1,14 @@
+name: code review test
+on: [pull_request]
+jobs:
+  code_review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Codeball
+        uses: sturdy-dev/codeball-action@v2
+        with:
+          # For all configuration options see https://github.com/sturdy-dev/codeball-action/blob/v2/action.yml
+          approvePullRequests: "true"
+          labelPullRequestsWhenApproved: "true"
+          labelPullRequestsWhenReviewNeeded: "false"
+          failJobsWhenReviewNeeded: "false"
