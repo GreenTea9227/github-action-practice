@@ -19,16 +19,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build Docker Image
-        run: docker build -t sjohn9227/humancat-server:latest .
+      # - name: Build Docker Image
+      #   run: docker build -t sjohn9227/humancat-server:latest .
 
-      - name: Push Docker Image to DockerHub
-        run: docker push sjohn9227/humancat-server:latest
+      # - name: Push Docker Image to DockerHub
+      #   run: docker push sjohn9227/humancat-server:latest
 
-      # - name: Container Build and Push to DockerHub
-        # uses: docker/build-push-action@v2
-        # with:
-        #   context: ./
-        #   file: ./Dockerfile
-        #   push: true
-        #   tags: ${{ secrets.DOCKERHUB_USERNAME }}/humancat
+      - name: Container Build and Push to DockerHub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/humancat
