@@ -1,0 +1,58 @@
+name: step-output-example
+on:
+  workflow_dispatch:
+env:
+  name: john
+jobs:
+  process-data:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 첫번째 단계 - 데이터 생성
+      id: generate-data
+      run: |
+        echo "hello world" > hello.txt
+        echo "${{ env.name }}" >> hello.txt
+        MESSAGE="안녕하세요, ${{ env.name }}님!"
+        echo "message=$MESSAGE" >> $GITHUB_OUTPUT
+        echo "timestamp=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
+        echo "count=42" >> $GITHUB_OUTPUT
+        
+    - name: 두번째 단계 - 이전 단계의 출력값 사용
+      id: use-output
+      run: |
+        echo "이전 단계에서 받은 메시지: ${{ steps.generate-data.outputs.message }}"
+        echo "현재 시간: ${{ steps.generate-data.outputs.timestamp }}"
+        echo "카운트 값: ${{ steps.generate-data.outputs.count }}"
+        
+        # 출력값으로 새 파일 만들기
+        echo "메시지: ${{ steps.generate-data.outputs.message }}" > result.txt
+        echo "시간: ${{ steps.generate-data.outputs.timestamp }}" >> result.txt
+        echo "카운트: ${{ steps.generate-data.outputs.count }}" >> result.txt
+        
+        # 다음 단계를 위한 새 출력값 설정
+        echo "result_file=result.txt" >> $GITHUB_OUTPUT
+        
+    - name: 세번째 단계 - 결과 확인 및 업로드
+      run: |
+        echo "결과 파일 내용:"
+        cat ${{ steps.use-output.outputs.result_file }}
+        
+    - name: 아티팩트 업로드
+      uses: actions/upload-artifact@v4
+      with:
+        name: result
+        path: ${{ steps.use-output.outputs.result_file }}
+        
+  download-job:
+    needs: process-data
+    runs-on: ubuntu-latest
+    steps:
+    - name: 아티팩트 다운로드
+      uses: actions/download-artifact@v4
+      with:
+        name: result
+        
+    - name: 다운로드된 파일 확인
+      run: |
+        echo "다운로드된 파일 내용:"
+        cat result.txt
