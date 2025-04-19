@@ -56,3 +56,12 @@ jobs:
       run: |
         echo "다운로드된 파일 내용:"
         cat result.txt
+  test1:
+    runs-on: [ubuntu-latest]
+    steps:
+    - name: move
+      run: cd ../..
+
+    - name: show pwd
+      run: pwd
+      
